@@ -17,7 +17,7 @@
 
 # Brief
 This project is based on WA-SSGAN model to study lithology identification with few labels.
-- [Github](https://github.com/Federal789/test)
+- [Github](https://github.com/Federal789/test/tree/master)
 
 
 # Environment
