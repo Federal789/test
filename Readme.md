@@ -1,10 +1,10 @@
 # __Contents__
 
 <!-- TOC -->
-- [Project Brief](#Project Brief)
+- [Brief](#Brief)
 - [Environment](#Environment)
   - [Configuration](#Configuration)
-  - [Library Version](#Library Version)
+  - [Version](#Version)
 - [Dataset](#Dataset)
 - [Exhibition](#Exhibition)
   - [Structure](#Structure)
