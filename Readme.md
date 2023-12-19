@@ -15,7 +15,7 @@
 
 <!-- /TOC -->
 
-# Project Brief
+# Brief
 This project is based on WA-SSGAN model to study lithology identification with few labels.
 - [Github](https://github.com/Federal789/test)
 
@@ -35,7 +35,7 @@ Compile：gcc==7.5.0, g++==7.5.0：
 Driver：DRIVER VERSION:470.141.03 + CUDA-11.2 + CUDNN-8.0.5。
 
 
-## Library Version
+## Version
 keras==2.1.6; \
 tensorflow-gpu==1.8.0; \
 protobuf==3.17.2; \
