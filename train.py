@@ -18,9 +18,6 @@ new_param = []
 for i in range(len_param):
     new_pa = (dis_wb1[i] * (fscore1 ** 1) + dis_wb2[i] * (fscore2 ** 1) + dis_wb3[i] * (fscore3 ** 1))\
             / (1 * (fscore1 ** 1) + 1 * (fscore2 ** 1) + 1 * (fscore3 ** 1))
-    #new_pa = (dis_wb1[i] * (fscore1 ** 1) + dis_wb2[i] * (fscore2 ** 1))\
-    #        / (1 * (fscore1 ** 1) + 1 * (fscore2 ** 1))
-    # new_pa = np.mean(np.array([dis_wb1[i], dis_wb2[i], dis_wb3[i]]), axis=0)
     new_param.append(new_pa)
 
 net_new = build_discriminator(sam_shape, dropout)
@@ -33,7 +30,7 @@ y3_pred = y3_pred.reshape(-1, 1)
 result_test = classification_report(y3, y3_pred)
 print(result_test)
 f1_test = f1_score(y3, y3_pred, average=None)
-# f1 = np.vstack((f1_test, f1_score(y3, y3_pred, average='macro')))
+
 print(f1_test)
 print(np.mean(f1_test))
 print(f1_score(y3, y3_pred, average='macro'))
@@ -59,10 +56,11 @@ plt.xticks(x, ('RS', 'OS', 'SA'), fontsize=14)
 plt.yticks(x, ('RS', 'OS', 'SA'), fontsize=14)
 plt.tight_layout()
 plt.savefig('./images/conf_mat'+'/per{}.jpg'.format(per))
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
 
 
 # Save t-SNE
+'''
 dis_1 = Model(inputs=net_new.inputs,
               outputs=net_new.get_layer('leaky_re_lu_16').output)
 
@@ -137,3 +135,4 @@ np.random.seed(1)
 tsne = TSNE(n_components=2, init='pca', random_state=1)  # n_components将64维降到该维度，默认2
 result_out = tsne.fit_transform(np.vstack((dis_sig_tr, dis_sig_real)))
 plot_embedding_disc(result_out, tr_lab, real_lab, '{}%, t-SNE embedding of the output'.format(per), per, 'output')  # 显示数据
+'''

@@ -7,15 +7,6 @@ np.random.seed(1)
 tf.compat.v1.set_random_seed(1)
 random.seed(1)
 
-# for j in range(1, batch_size + 1):
-#    path1 = './images/comparison/KF1' + r'/per_{}'.format(per) + r'/sam_' + str(j)
-#    os.makedirs(path1)
-
-# for i in range(1, batch_size + 1):
-#     for k in range(1, iterations / plot_interval):
-#         path = './images/comparison/KF1' + r'/per_{}'.format(per) + r'/sample_' + str(i) + r'/epoch_' + str(plot_interval * k)
-#         os.makedirs(path)
-
 def train(iterations, batch_size, sample_interval, mt_size, set_class, weight_per_class, get_samples, get_labels, num,
           x_val, y_val):
     # Labels for real images: all ones
@@ -76,43 +67,47 @@ def train(iterations, batch_size, sample_interval, mt_size, set_class, weight_pe
 
         d_loss_unsupervised = 0.5 * np.add(d_loss_real, d_loss_fake)  # 超参数
 
-        # if ((iteration + 1 == 10) or (iteration + 1 == 200) or (iteration + 1 == 800)
-        #     or (iteration + 1 == 2000) or (iteration + 1 == 3600) or (iteration + 1 == 4800)
-        #     or (iteration + 1 == 6400) or (iteration + 1 == iterations)) & (d_loss_unsupervised <= 3):
-        #     # tsne
-        #     dis_3 = Model(inputs=discriminator_net.inputs,
-        #                   outputs=discriminator_net.get_layer('dense_1').output)
-        #     dis_3_fake = dis_3.predict(gen_samples)
-        #     dis_3_real = dis_3.predict(samples_unlabeled)
-        #     dis_3_lab = dis_3.predict(sup_samples)
-        #     # real_sam = samples_unlabeled.reshape(batch_size, -1)
-        #     # sup_sam = sup_samples.reshape(batch_size, -1)
-        #     gen_tsne = dis_3_fake.copy()
-        #     real_tsne = dis_3_real.copy()
-        #     sup_tsne = dis_3_lab.copy()
-        #     gen_real = np.vstack((sup_tsne, real_tsne, gen_tsne))
-        #     lab_unlabeled = [x + num_classes for x in lab_un]
-        #     gr_pre = np.vstack((sup_labels_, lab_unlabeled,
-        #                         2 * num_classes * np.ones((batch_size, 1))))
-        #     tsne = TSNE(n_components=2, init='pca', random_state=1)
-        #     label = gr_pre.reshape(3 * batch_size)
-        #     result = tsne.fit_transform(gen_real)                     # 进行降维
-        #     np.save('./result/res{}_{}_{}.npy'.format(per, num, iteration + 1), result)
-        #     np.save('./result/lab{}_{}_{}.npy'.format(per, num, iteration + 1), label)
-        #     plot_embedding_gen(result, label, 1, '{}% labels, epoch{}'.format(per, iteration + 1),
-        #                        per, 'epoch{}'.format(iteration + 1))  # 显示数据
+        # ---------------------
+        #  Visualize the training process
+        # ---------------------
+        '''
+        if ((iteration + 1 == 10) or (iteration + 1 == 200) or (iteration + 1 == 800)
+            or (iteration + 1 == 2000) or (iteration + 1 == 3600) or (iteration + 1 == 4800)
+            or (iteration + 1 == 6400) or (iteration + 1 == iterations)) & (d_loss_unsupervised <= 3):
+            # tsne
+            dis_3 = Model(inputs=discriminator_net.inputs,
+                          outputs=discriminator_net.get_layer('dense_1').output)
+            dis_3_fake = dis_3.predict(gen_samples)
+            dis_3_real = dis_3.predict(samples_unlabeled)
+            dis_3_lab = dis_3.predict(sup_samples)
+            # real_sam = samples_unlabeled.reshape(batch_size, -1)
+            # sup_sam = sup_samples.reshape(batch_size, -1)
+            gen_tsne = dis_3_fake.copy()
+            real_tsne = dis_3_real.copy()
+            sup_tsne = dis_3_lab.copy()
+            gen_real = np.vstack((sup_tsne, real_tsne, gen_tsne))
+            lab_unlabeled = [x + num_classes for x in lab_un]
+            gr_pre = np.vstack((sup_labels_, lab_unlabeled,
+                                2 * num_classes * np.ones((batch_size, 1))))
+            tsne = TSNE(n_components=2, init='pca', random_state=1)
+            label = gr_pre.reshape(3 * batch_size)
+            result = tsne.fit_transform(gen_real)                     # 进行降维
+            np.save('./result/res{}_{}_{}.npy'.format(per, num, iteration + 1), result)
+            np.save('./result/lab{}_{}_{}.npy'.format(per, num, iteration + 1), label)
+            plot_embedding_gen(result, label, 1, '{}% labels, epoch{}'.format(per, iteration + 1),
+                               per, 'epoch{}'.format(iteration + 1))  # 显示数据
 
-        # if ((iteration + 1 == 500) or (iteration + 1 == 3000) or (iteration + 1 == iterations)):
-        #     # Comparison of the real and the fake samples.
-        #     curves = list(range(num_features))
-        #     for i in range(batch_size):
-        #         # Comparison of the real and the fake samples without any convolutions.
-        #         gen_sam_ = pd.DataFrame(gen_samples[i, :, :, 0])
-        #         gen_sam = gen_sam_.iloc[:, curves]
-        #         plt_curves(gen_sam, figsize=(11, 5), dpi=420, sup1="Generated samples of model 1 in epoch{}".format(iteration+1))
-        #         plt.savefig('./images/comparison/KF1' + '/per_{}'.format(per) + '/sam_{}'.format(
-        #             i + 1) + '/epoch_{}.jpg'.format(iteration + 1))
-
+        if ((iteration + 1 == 500) or (iteration + 1 == 3000) or (iteration + 1 == iterations)):
+            # Comparison of the real and the fake samples.
+            curves = list(range(num_features))
+            for i in range(batch_size):
+                # Comparison of the real and the fake samples without any convolutions.
+                gen_sam_ = pd.DataFrame(gen_samples[i, :, :, 0])
+                gen_sam = gen_sam_.iloc[:, curves]
+                plt_curves(gen_sam, figsize=(11, 5), dpi=420, sup1="Generated samples of model 1 in epoch{}".format(iteration+1))
+                plt.savefig('./images/comparison/KF1' + '/per_{}'.format(per) + '/sam_{}'.format(
+                    i + 1) + '/epoch_{}.jpg'.format(iteration + 1))
+        '''
 
         # ---------------------
         #  Train the Generator
@@ -133,7 +128,6 @@ def train(iterations, batch_size, sample_interval, mt_size, set_class, weight_pe
                   % (iteration + 1, d_loss_supervised, 100 * accuracy, d_loss_unsupervised, g_loss))
 
         x2, y2 = x_val * 1, y_val * 1
-        # y2_pred = discriminator_supervised.predict_classes(x2)
         y2_pred = np.argmax(discriminator_supervised.predict(x2), axis=1)
         y2_pred = y2_pred.reshape(-1, 1)
         fscore_val = f1_score(y2, y2_pred, average='macro')
@@ -186,9 +180,8 @@ def train(iterations, batch_size, sample_interval, mt_size, set_class, weight_pe
             # plt.savefig(filePath4)
 
 
-        #     # print(gen_samples)
         #
-        #     # Save Discriminator supervised classification loss to be plotted after training
+            # Save Discriminator supervised classification loss to be plotted after training
             supervised_losses.append(d_loss_supervised)
             iteration_checkpoints.append(iteration + 1)
 

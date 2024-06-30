@@ -12,7 +12,7 @@ from matplotlib.pyplot import MultipleLocator
 
 plt.rcParams['font.sans-serif'] = ['Arial']    # 中文
 plt.rcParams['axes.unicode_minus'] = False
-style.use('Solarize_Light2')
+# style.use('Solarize_Light2')
 
 # 多种算法对比
 fig = plt.figure(figsize=(10, 7), dpi=500)
@@ -101,21 +101,21 @@ MIX = np.array([0.7986, 0.8536, 0.8815, 0.8984, 0.9138])
 Ours = np.array([0.8153, 0.8778, 0.9064, 0.9233, 0.9322])
 
 x = np.arange(0, bar_width * (1 + 8) * len(labels), bar_width * (1 + 8))
-plt.bar(x + 1 * bar_width, SVM_L, color='white', edgecolor='firebrick', width=bar_width, hatch='++', label='LapSVM')
-plt.bar(x + 2 * bar_width, KNN_L, color='white', edgecolor='gold', width=bar_width, hatch='O', label='LPA+KNN')
-plt.bar(x + 3 * bar_width, DT_L, color='white', edgecolor='#228B22', width=bar_width, hatch='xx', label='LPA+DT')
-plt.bar(x + 4 * bar_width, FCN_L, color='white', edgecolor='#1E90FF', width=bar_width, hatch='..', label='LPA+FCN')
-plt.bar(x + 5 * bar_width, LN, color='white', edgecolor='#7B68EE', width=bar_width, hatch='||||', label='LadderNet')
-plt.bar(x + 6 * bar_width, MT, color='white', edgecolor='violet', width=bar_width, hatch='--', label='Mean Teacher')
-plt.bar(x + 7 * bar_width, MIX, color='white', edgecolor='tan', width=bar_width, hatch='///', label='MixMatch')
-plt.bar(x + 8 * bar_width, Ours, color='white', edgecolor='Navy', width=bar_width, hatch='*', label='WA-SSGAN')
+plt.bar(x + 1 * bar_width, SVM_L, color='r', edgecolor='k', width=bar_width, label='LapSVM')
+plt.bar(x + 2 * bar_width, KNN_L, color='gold', edgecolor='k', width=bar_width, label='LPA+KNN')
+plt.bar(x + 3 * bar_width, DT_L, color='#228B22', edgecolor='k', width=bar_width, label='LPA+DT')
+plt.bar(x + 4 * bar_width, FCN_L, color='#1E90FF', edgecolor='k', width=bar_width, label='LPA+FCN')
+plt.bar(x + 5 * bar_width, LN, color='#7B68EE', edgecolor='k', width=bar_width, label='LadderNet')
+plt.bar(x + 6 * bar_width, MT, color='violet', edgecolor='k', width=bar_width, label='Mean Teacher')
+plt.bar(x + 7 * bar_width, MIX, color='tan', edgecolor='k', width=bar_width, label='MixMatch')
+plt.bar(x + 8 * bar_width, Ours, color='grey', edgecolor='k', width=bar_width, label='WA-SSGAN')
 
 sns.despine(left=False, bottom=False)
 plt.xticks(x + 4 * bar_width, labels=labels, fontdict={'weight': 600, 'size': 17, 'color': 'k'})
 plt.yticks(fontsize=17, fontweight=600, color='k')
 plt.legend(prop=leg_prop, loc='lower right', borderpad=0.8, fancybox=True)
 plt.xlabel('Label ratio(%)', fontdict={'weight': 600, 'size': 19.5, 'color': 'k'})
-# plt.ylabel('Average F1-score', fontdict={'weight': 550, 'size': 17, 'color': 'k'})
+plt.ylabel('Average F1-score', fontdict={'weight': 550, 'size': 17, 'color': 'k'})
 # plt.title('Comparison of different semi-supervised algorithms', fontdict={'weight': 700, 'size': 20})
 
 index = np.arange(0, bar_width * (1 + 8) * 8, bar_width * (1 + 8))

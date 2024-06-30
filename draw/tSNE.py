@@ -5,11 +5,11 @@ from sklearn.manifold import TSNE
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler, StandardScaler
 import seaborn as sns
 
-sam_A, lab_A = np.load('bo20_sam.npy'), np.load('bo20_lab.npy')
-sam_B, lab_B = np.load('bo5_sam.npy'), np.load('bo5_lab.npy')
-sam_C, lab_C = np.load('bo19_sam.npy'), np.load('bo19_lab.npy')
-sam_D, lab_D = np.load('boxie_sam.npy'), np.load('boxie_lab.npy')
-sam_E, lab_E = np.load('bo3_sam.npy'), np.load('bo3_lab.npy')
+sam_A, lab_A = np.load(r'H:\360桌面助手\TSS\bo_data\bo20_sam.npy'), np.load(r'H:\360桌面助手\TSS\bo_data\bo20_lab.npy')
+sam_B, lab_B = np.load(r'H:\360桌面助手\TSS\bo_data\bo5_sam.npy'), np.load(r'H:\360桌面助手\TSS\bo_data\bo5_lab.npy')
+sam_C, lab_C = np.load(r'H:\360桌面助手\TSS\bo_data\bo19_sam.npy'), np.load(r'H:\360桌面助手\TSS\bo_data\bo19_lab.npy')
+sam_D, lab_D = np.load(r'H:\360桌面助手\TSS\bo_data\boxie_sam.npy'), np.load(r'H:\360桌面助手\TSS\bo_data\boxie_lab.npy')
+sam_E, lab_E = np.load(r'H:\360桌面助手\TSS\bo_data\bo3_sam.npy'), np.load(r'H:\360桌面助手\TSS\bo_data\bo3_lab.npy')
 
 sam_all_ = np.vstack([sam_A, sam_B, sam_C, sam_D, sam_E])
 lab_all = np.hstack([lab_A, lab_B, lab_C, lab_D, lab_E])
